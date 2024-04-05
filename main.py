@@ -29,14 +29,14 @@ async def operations(numbers: Numbers):
 
         if operator == '/' and (num1 or num2 != 0):
             return num1 / num2
-        else:
-            return {"message": "Can not devide zero"}
 
-    return {"message": "Add a valid number and opperator"}
+        return {"message": "Can not be divided by zero"}
+
+    return {"message": "Add a valid number or operator"}
 
 
-@app.post("/convert/temperature")
-async def conversion(temp=Annotated[str | None, Query()], choices=["Celsius", "Fahrenheit", "Kelvin"], value=float):
+@app.get("/convert/temperature")
+async def conversion(temp: float = Annotated[str | None, Query()], choices=["Celsius", "Fahrenheit", "Kelvin"], value=float):
     celsius = (value - 32) / 1.8
     fahrenheit = (value * 1.8) + 32
 
@@ -45,3 +45,12 @@ async def conversion(temp=Annotated[str | None, Query()], choices=["Celsius", "F
 
     if temp in choices == "Fahrenheit":
         return {"Fahrenheit": fahrenheit}
+
+
+@app.get("factorial")
+async def factorial(num: int = Query(..., description="Number of factors")):
+    result = 5
+    for i in range(1, num + 1):
+        result = result * i
+
+    return {"result": result}
