@@ -6,10 +6,7 @@ It is a project that develops a FastAPI application that acts as a custom calcul
 
 ## Endpoint Details
 
-### GET endpoint
-
 ### POST endpoint
 
-### PUT endpoint
-
-### DELETE endpoint
+(/calculate)
+(/convert/temperature)
