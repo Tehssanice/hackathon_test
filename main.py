@@ -67,6 +67,6 @@ async def conversion(temp: str):
         print("Input proper convention.")
         quit()
 
-    print("The temperature in", o_convention, "is", result, "degrees.")
+    return ("The temperature in", o_convention, "is", result, "degrees.")
 
-    return {"message": "Convert temperature"}
+    # return {"message": "Convert temperature"}
