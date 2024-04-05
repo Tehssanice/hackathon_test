@@ -62,5 +62,5 @@ async def interest(principal: float = Query(..., description="Principal amount")
 
 
 @app.get("/palindrome")
-async def palindrome(word: str = Query(..., description="Word to be checked")):
+async def palindrome(word: str = Query(..., description="Palindrome word")):
     return word == word[::-1]
