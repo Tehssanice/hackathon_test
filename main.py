@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from pydantic import BaseModel
+from typing import Annotated
 
 app = FastAPI()
 
@@ -51,22 +52,30 @@ async def addition(numbers: Numbers):
 
 
 @app.post("/convert/temperature")
-async def conversion(temp: str):
+async def conversion(temp=Annotated[str | None, Query()], choices=["Celsius", "Fahrenheit", "Kelvin"], value=float):
+    celsius = (value - 32) / 1.8
+    fahrenheit = (value * 1.8) + 32
 
-    degree = int(temp[:-1])
+    if temp in choices == "Celsius":
+        return {"Celsius": celsius}
 
-    i_convention = temp[-1]
+    if temp in choices == "Fahrenheit":
+        return {"Fahrenheit": fahrenheit}
 
-    if i_convention.upper() == "C":
-        result = int(round((9 * degree) / 5 + 32))
-        o_convention = "Fahrenheit"
-    elif i_convention.upper() == "F":
-        result = int(round((degree - 32) * 5 / 9))
-        o_convention = "Celsius"
-    else:
-        print("Input proper convention.")
-        quit()
+    # degree = int(temp[-1])
 
-    return ("The temperature in", o_convention, "is", result, "degrees.")
+    # i_convention = temp[-1]
+
+    # if i_convention.upper() == "C":
+    #     result = int(round((9 * degree) / 5 + 32))
+    #     o_convention = "Fahrenheit"
+    # elif i_convention.upper() == "F":
+    #     result = int(round((degree - 32) * 5 / 9))
+    #     o_convention = "Celsius"
+    # else:
+    #     print("Input proper convention.")
+    #     quit()
+
+    # return ("The temperature in", o_convention, "is", result, "degrees.")
 
     # return {"message": "Convert temperature"}
