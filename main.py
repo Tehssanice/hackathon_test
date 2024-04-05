@@ -51,5 +51,8 @@ async def addition(numbers: Numbers):
 
 
 @app.post("/convert/temperature")
-async def conversion(string):
+async def conversion(string, required, choices=["Celsius", "Fahrenheit", "Kelvin"]):
+    if string == "Celsius":
+        return {"message": "Celsius"}
+
     return {"message": "Convert temperature"}
