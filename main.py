@@ -52,8 +52,6 @@ async def addition(numbers: Numbers):
 
 @app.post("/convert/temperature")
 async def conversion(temp: str):
-    temp = input(
-        "Input the temperature you like to convert? (e.g., 45F, 102C etc.) : ")
 
     degree = int(temp[:-1])
 
