@@ -54,3 +54,13 @@ async def factorial(num: int = Query(..., description="Number of factors")):
         result = result * i
 
     return {"result": result}
+
+
+@app.get("/interest")
+async def interest(principal: float = Query(..., description="Principal amount"), rate: float = Query(..., description="Interest rate"), years: int = Query(..., description="Number of years")):
+    return {"amount": principal * (1 + rate / 100) ** (years * 12)}
+
+
+@app.get("/palindrome")
+async def palindrome(word: str = Query(..., description="Word to be checked")):
+    return word == word[::-1]
